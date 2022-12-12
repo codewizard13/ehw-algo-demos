@@ -33,6 +33,109 @@ function filenameToLines(filename) {
 
 }
 
+
+
+const bar = '*'.repeat(30)
+
+/**
+ * Main: The main function; controller.
+ */
+function main() {
+
+  console.log(bar)
+
+  const docs_path = '../' + 'data-docs/'
+
+  // SLURP DATA FILE INTO ARRAY
+  const peopleFile = docs_path + 'people2.txt'
+
+  const fullNames = filenameToLines(peopleFile)
+  console.log({ fullNames })
+
+  surnamesDict = buildNamesDict(fullNames)
+
+
+  // ADD extra names to debug near bottom of output
+  surnamesDict["Gillian"].push("Michael J. Gillian", "Janet Gillian", "Ann Gillian")
+
+
+  // SEARCH FOR name in dict
+  let needle = 'ABEL'
+
+
+  for (const [surname, namesGroup] of Object.entries(surnamesDict)) {
+
+    let lowerSurname = surname.toLowerCase()
+    let lowerNeedle = needle.toLowerCase()
+
+    // console.log(`lowerSurname:`, lowerSurname, `lowerNeedle`, lowerNeedle)
+    // console.log({ namesGroup })
+
+    // ADD key to matches if key contains needle
+    if (lowerSurname.includes(lowerNeedle)) {
+      console.log(`Matched: ${surname}`)
+      console.log([surname, family])
+    }
+
+    // ADD names in names group that contain needle
+    namesGroup.forEach(name => {
+      let lowerName = name.toLowerCase()
+      if (lowerName.includes(lowerNeedle)) {
+        console.log(name, `matched needle`, needle)
+        results.push(name)
+
+      }
+
+
+    }) // END familes
+
+
+  }
+
+  console.log()
+  console.log({ results })
+  console.log(`\nmatchedNames:`, matchedNames)
+  console.table(surnamesDict)
+
+
+} // END main
+
+let surnamesDict = {}
+const results = []
+let matchedNames = []
+
+
+main()
+
+
+function buildNamesDict(fullNamesArray) {
+
+  const dict = {}
+
+  // BUILD NAMES DICTIONARY
+  for (let i = 0; i < fullNamesArray.length; i++) {
+
+    let name = fullNamesArray[i]
+    let tmpArr = name.split(' ')
+    let surname = tmpArr[tmpArr.length - 1]
+
+    // ADD NAME TO DICT
+    if (!(surname in dict)) {
+      dict[surname] = []
+    }
+    dict[surname].push(name)
+
+  }
+
+  // console.log({ dict })
+  return dict
+}
+
+
+
+
+
+
 /*
 ALGORITHM
 
@@ -66,98 +169,3 @@ END
 RETURN surnamesDict
 
 */
-const bar = '*'.repeat(30)
-
-/**
- * Main: The main function; controller.
- */
-function main() {
-
-  console.log(bar)
-
-  const docs_path = '../' + 'data-docs/'
-
-  // SLURP DATA FILE INTO ARRAY
-  const peopleFile = docs_path + 'people2.txt'
-
-  const fullNames = filenameToLines(peopleFile)
-  // console.log({ fullNames })
-
-
-  // BUILD NAMES DICTIONARY
-  for (let i = 0; i < fullNames.length; i++) {
-
-    let name = fullNames[i]
-    let tmpArr = name.split(' ')
-    let surname = tmpArr[tmpArr.length - 1]
-
-    // ADD NAME TO DICT
-    if (!(surname in surnamesDict)) {
-      surnamesDict[surname] = []
-    }
-    surnamesDict[surname].push(name)
-
-  }
-
-  // ADD extra names to debug near bottom of output
-  surnamesDict["Gillian"].push("Michael J. Gillian", "Janet Gillian", "Ann Gillian")
-
-
-  // SEARCH FOR name in dict
-  let needle = 'ABEL'
-
-
-  for (const [surname, namesGroup] of Object.entries(surnamesDict)) {
-
-    let lowerSurname = surname.toLowerCase()
-    let lowerNeedle = needle.toLowerCase()
-
-    console.log(`lowerSurname:`, lowerSurname, `lowerNeedle`, lowerNeedle)
-    console.log({ namesGroup })
-
-    // ADD key to matches if key contains needle
-    if (lowerSurname.includes(lowerNeedle)) {
-      console.log(`Matched: ${surname}`)
-      console.log([surname, family])
-    }
-
-    // ADD names in names group that contain needle
-    namesGroup.forEach(name => {
-      let lowerName = name.toLowerCase()
-      if (lowerName.includes(lowerNeedle)) {
-        console.log(name, `matched needle`, needle)
-        results.push(name)
-
-      }
-
-
-    }) // END familes
-
-
-  }
-
-  console.log()
-  console.log({ results })
-  console.log(`\nmatchedNames:`, matchedNames)
-
-
-} // END main
-
-const surnamesDict = {}
-const results = []
-let matchedNames = []
-
-
-main()
-
-// Unused
-function getValueByKey(obj, key) {
-
-  if (!(key in obj)) {
-    return false
-  } else {
-    let found = obj[key]
-    return found
-  }
-
-}
