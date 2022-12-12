@@ -1,18 +1,17 @@
 /*
-Jessica McKellar challenges - 2022-12-11
+File Name: find-families.js
 
-Challenge:
+Programming:  Eric Hepperle
+Date Created: 2022-12-11
+Version:      0.0.1
 
-There is at least one country name that contains another country name. Find all of these cases.
+App Type:     Algo Demo
 
+Purpose: Gien a list of full names of people, determine possible family members. Group results by last name
 
 --- --- ---
 TIME COMPLEXITY:
 
-Eric Hepperle
-2022-12-11
-
-V1
 
 */
 
