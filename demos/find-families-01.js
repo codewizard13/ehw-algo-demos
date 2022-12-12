@@ -33,34 +33,6 @@ function filenameToLines(filename) {
 
 }
 
-
-/**
- * Main: The main function; controller.
- */
-function main() {
-
-  console.log('*'.repeat(30), `\n`)
-
-  const docs_path = '../' + 'data-docs/'
-
-  // SLURP DATA FILE INTO ARRAY
-  const peopleFile = docs_path + 'people2.txt'
-
-  const fullNames = filenameToLines(peopleFile)
-  console.log({ fullNames })
-
-
-
-  console.log({ results })
-
-} // END main
-
-const surnamesDict = {}
-const results = []
-
-main()
-
-
 /*
 ALGORITHM
 
@@ -94,3 +66,49 @@ END
 RETURN surnamesDict
 
 */
+
+/**
+ * Main: The main function; controller.
+ */
+function main() {
+
+  console.log('*'.repeat(30), `\n`)
+
+  const docs_path = '../' + 'data-docs/'
+
+  // SLURP DATA FILE INTO ARRAY
+  const peopleFile = docs_path + 'people2.txt'
+
+  const fullNames = filenameToLines(peopleFile)
+  // console.log({ fullNames })
+
+
+  // BUILD NAMES DICTIONARY
+  for (let i = 0; i < fullNames.length; i++) {
+
+    let name = fullNames[i]
+    let tmpArr = name.split(' ')
+    let surname = tmpArr[tmpArr.length - 1]
+    // console.log(name.split(' '))
+    console.log({ surname })
+
+    console.log(`name.length: `, name.length)
+
+    // ADD NAME TO DICT
+    if (!(surname in surnamesDict)) {
+      surnamesDict[surname] = []
+    }
+    surnamesDict[surname].push(name)
+
+  }
+
+  console.log({ surnamesDict })
+
+} // END main
+
+const surnamesDict = {}
+// const results = []
+
+main()
+
+
