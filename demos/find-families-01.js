@@ -90,10 +90,6 @@ function main() {
     let name = fullNames[i]
     let tmpArr = name.split(' ')
     let surname = tmpArr[tmpArr.length - 1]
-    // console.log(name.split(' '))
-    // console.log({ surname })
-
-    // console.log(`name.length: `, name.length)
 
     // ADD NAME TO DICT
     if (!(surname in surnamesDict)) {
@@ -106,8 +102,6 @@ function main() {
   // ADD extra names to debug near bottom of output
   surnamesDict["Gillian"].push("Michael J. Gillian", "Janet Gillian", "Ann Gillian")
 
-  // console.log({ surnamesDict })
-
 
   // SEARCH FOR name in dict
   let needle = 'ABEL'
@@ -119,10 +113,10 @@ function main() {
   // results = getValueByKey(surnamesDict, needle)
   // console.log({ results })
 
-  let surnames = Object.keys(surnamesDict)
-  let families = Object.values(surnamesDict)
-  console.log(`Unique surnames:`, surnames.length)
-  console.log(`families:`, families)
+  // let surnames = Object.keys(surnamesDict)
+  // let families = Object.values(surnamesDict)
+  // console.log(`Unique surnames:`, surnames.length)
+  // console.log(`families:`, families)
   // LOOP THROUGH EACH SURNAME
   // for (let i = 0; i < surnames.length; i++) {
 
@@ -130,44 +124,38 @@ function main() {
   // let results = Object.entries(surnamesDict)
   //   .find(([key, value]) => key.toLowerCase().includes(needle.toLowerCase()) || value.toLowerCase().indexOf(needle.toLowerCase()) !== -1)
 
-  for (const [surname, family] of Object.entries(surnamesDict)) {
+  for (const [surname, namesGroup] of Object.entries(surnamesDict)) {
 
     let lowerSurname = surname.toLowerCase()
     let lowerNeedle = needle.toLowerCase()
 
     console.log(`lowerSurname:`, lowerSurname, `lowerNeedle`, lowerNeedle)
-    console.log({ family })
+    console.log({ namesGroup })
 
+    // ADD key to matches if key contains needle
     if (lowerSurname.includes(lowerNeedle)) {
       console.log(`Matched: ${surname}`)
       console.log([surname, family])
     }
-    // LOOP through each family group
-    families.forEach(family => {
-      // console.info('FAMILY: ', family)
-      console.log(bar)
-      // LOOP through each fullname in group
-      family.forEach(name => {
 
-        let lowerName = name.toLowerCase()
-        // console.log(lowerName.includes(lowerNeedle))
-        // console.log({ lowerName })
-        if (lowerName.includes(lowerNeedle)) {
-          console.log(name, `matched needle`, needle)
-          results.push(name)
-        }
+    // ADD names in names group that contain needle
+    namesGroup.forEach(name => {
+      let lowerName = name.toLowerCase()
+      if (lowerName.includes(lowerNeedle)) {
+        console.log(name, `matched needle`, needle)
+        results.push(name)
 
-      })
+      }
+
 
     }) // END familes
 
 
-    console.log(`\nmatchedNames:`, matchedNames)
-    results.push(matchedNames)
   }
 
   console.log()
   console.log({ results })
+  console.log(`\nmatchedNames:`, matchedNames)
 
 
 } // END main
@@ -179,7 +167,7 @@ let matchedNames = []
 
 main()
 
-
+// Unused
 function getValueByKey(obj, key) {
 
   if (!(key in obj)) {
