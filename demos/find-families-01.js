@@ -106,23 +106,6 @@ function main() {
   // SEARCH FOR name in dict
   let needle = 'ABEL'
 
-  // for (const [key, value] of Object.entries(surnamesDict)) {
-  //   console.log(`${key}:`, value)
-  // }
-
-  // results = getValueByKey(surnamesDict, needle)
-  // console.log({ results })
-
-  // let surnames = Object.keys(surnamesDict)
-  // let families = Object.values(surnamesDict)
-  // console.log(`Unique surnames:`, surnames.length)
-  // console.log(`families:`, families)
-  // LOOP THROUGH EACH SURNAME
-  // for (let i = 0; i < surnames.length; i++) {
-
-  // If current key contains
-  // let results = Object.entries(surnamesDict)
-  //   .find(([key, value]) => key.toLowerCase().includes(needle.toLowerCase()) || value.toLowerCase().indexOf(needle.toLowerCase()) !== -1)
 
   for (const [surname, namesGroup] of Object.entries(surnamesDict)) {
 
