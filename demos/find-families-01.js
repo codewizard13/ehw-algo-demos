@@ -41,11 +41,13 @@ function main() {
 
   console.log('*'.repeat(30), `\n`)
 
+  const docs_path = '../'
+
   // SLURP FILE DATA INTO ARRAYS
-  const babyNames1880File = '../../../docs/baby_names_1880_short.txt'
-  const babyNames2020File = '../../../docs/baby_names_2020_short.txt'
-  const scrabbleWordsFile = '../../../docs/sowpods.txt'
-  const countriesFile = '../../../docs/countries.txt'
+  const babyNames1880File = docs_path + 'docs/baby_names_1880_short.txt'
+  const babyNames2020File = docs_path + 'docs/baby_names_2020_short.txt'
+  const scrabbleWordsFile = docs_path + 'docs/sowpods.txt'
+  const countriesFile = docs_path + 'docs/countries.txt'
 
   const babyNames1880 = filenameToLines(babyNames1880File)
   const babyNames2020 = filenameToLines(babyNames2020File)
