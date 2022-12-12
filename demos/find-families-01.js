@@ -43,52 +43,19 @@ function main() {
 
   const docs_path = '../' + 'data-docs/'
 
-  // SLURP FILE DATA INTO ARRAYS
-  const babyNames1880File = docs_path + 'baby_names_1880_short.txt'
-  const babyNames2020File = docs_path + 'baby_names_2020_short.txt'
-  const scrabbleWordsFile = docs_path + 'sowpods.txt'
-  const countriesFile = docs_path + 'countries.txt'
+  // SLURP DATA FILE INTO ARRAY
   const peopleFile = docs_path + 'people2.txt'
 
-  const babyNames1880 = filenameToLines(babyNames1880File)
-  const babyNames2020 = filenameToLines(babyNames2020File)
-  const scrabbleWords = filenameToLines(scrabbleWordsFile)
-  const countries = filenameToLines(countriesFile)
   const fullNames = filenameToLines(peopleFile)
-
-  // console.log({ babyNames1880 })
-  // console.log({ babyNames2020 })
-  // console.log({ scrabbleWords })
-  // console.log({ countries })
   console.log({ fullNames })
 
 
-  for (let i = 0; i < countries.length; i++) {
-
-    let includedCountry = countries[i].toLowerCase()
-
-    for (let j = 0; j < countries.length; j++) {
-
-      let containingCountry = countries[j].toLowerCase()
-
-      // console.log({ includedCountry })
-      // console.log({ containingCountry })
-
-      if (containingCountry.includes(includedCountry)
-        && includedCountry !== containingCountry
-      ) {
-        // console.log('hi')
-        results.push([containingCountry, includedCountry])
-      }
-
-    }
-
-  }
 
   console.log({ results })
 
 } // END main
 
+const surnamesDict = {}
 const results = []
 
 main()
@@ -97,27 +64,33 @@ main()
 /*
 ALGORITHM
 
-DEFINE GLOBAL set foundCountries
+SLURPT names file into array (fullNames)
 
-SLURP country file contents into array (countries)
+DEFINE GLOBAL hashmap (surnamesDict)
 
-LOOP through countries
+LOOP through fullnames
 
-  ADD currentCountry to foundCountries
+  STORE current name (name)
 
+  // GET SURNAME FROM NAME
+  SPLIT name at spaces into array (tmpArr)
+  STORE last element of tmpArr (surname)
 
+  // HANDLE SURNAME
+  CHECK IF SURNAME is KEY in surnamesDict, IF NO
+
+    ADD surname as key to surnamesDict
+    INITIALIZE value to empty array
   
+  ELSE
+
+    PUSH current name onto surnamesDict.surname
+
+  END
 
 
+END
 
-
-
-
-
-
-END loop
-
-
-
+RETURN surnamesDict
 
 */
