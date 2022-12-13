@@ -16,28 +16,14 @@ TIME COMPLEXITY:
 
 */
 
+// Import the Node file system 'fs' module
 const fs = require('fs')
-
-/**
- * Return lines array from file
- * 
- * @args: {string} filename
- * @return: {array} lines
- */
-function filenameToLines(filename) {
-
-  const buffer = fs.readFileSync(filename)
-  const fileStr = buffer.toString()
-  const lines = fileStr.split('\n') // make array
-
-  return lines
-
-}
-
 
 // Define a visual horizonal rule (bar) to use in console:
 //   ******************************
-const bar = '*'.repeat(30)
+const bar = '\n' + '*'.repeat(30)
+
+
 
 /**
  * Main: The main function; controller.
@@ -55,36 +41,65 @@ function main() {
   // console.log({ fullNames })
   
   // BUILD NAMES DICT: Determines surname and groups full names by surname
-  surnamesDict = buildNamesDict(fullNames)
+  const surnamesDict = buildNamesDict(fullNames)
   
   // HOW TO OPTIONALLY ADD EXTRA NAMES the fullNames array
   //  external to slurping the file. This appends more names to the array:
   surnamesDict["Gillian"].push("Michael J. Gillian", "Janet Gillian", "Ann Gillian")
+
+  // DISPLAY the surnames dict as table
+  console.log(`\nTABLE OF FULL NAMES ORGANIZED BY SURNAME\n`)
+  console.table(surnamesDict)
 
   // DEFINE what you want to search for in surnamesDict. Can be any case
   //  (upper, lower, mixed) search string (needle) is converted
   //  for comparison in the code.
   let needle = 'ABEL'
 
-  let matchedNames = searchStrInDict(needle, surnamesDict)
+  // let matchedNames = searchStrInDict(needle, surnamesDict)
 
   
+  // Strings to search
+  testValues = [
+    'ard', 'ik', 'ZELL', 'ZEL', 'ey', 'AbeL', 'Avel'
+  ]
 
-  console.log()
-  console.log(`\nmatchedNames:`, matchedNames)
-  console.table(surnamesDict)
-
+  // DISPLAY RESULTS with various search strings
+  testHarness(testValues, surnamesDict)
 
 } // END main
-
-let surnamesDict = {}
-const results = []
-let matchedNames = []
-
 
 main()
 
 
+
+/// HELPER FUNCTIONS ///
+
+
+/**
+ * Split text file into array of lines.
+ * 
+ * @arg: {string} filename
+ * @return: {array} lines
+ */
+ function filenameToLines(filename) {
+
+  const buffer = fs.readFileSync(filename)
+  const fileStr = buffer.toString()
+  const lines = fileStr.split('\n') // make array
+
+  return lines
+
+}
+
+/**
+ * Build a dictionary / hashmap organized by surnames.
+ * 
+ * CAVEAT: Doesn't account for or handle surnames with spaces like 'La Pierre'.
+ *  
+ * @param {array} fullNamesArray 
+ * @returns {object} dict 
+ */
 function buildNamesDict(fullNamesArray) {
 
   const dict = {}
@@ -94,6 +109,8 @@ function buildNamesDict(fullNamesArray) {
 
     let name = fullNamesArray[i]
     let tmpArr = name.split(' ')
+
+    // Last element of temp array is surname
     let surname = tmpArr[tmpArr.length - 1]
 
     // ADD NAME TO DICT
@@ -104,11 +121,18 @@ function buildNamesDict(fullNamesArray) {
 
   }
 
-  // console.log({ dict })
   return dict
+
 }
 
-
+/**
+ * Given a search string and a hashmap / dictionary of names grouped by surname,
+ *  returns full names containing that search string.
+ * 
+ * @param {string} needle 
+ * @param {object} dict 
+ * @returns {array} matches
+ */
 function searchStrInDict(needle, dict) {
 
   const matches = []
@@ -118,7 +142,7 @@ function searchStrInDict(needle, dict) {
     let lowerSurname = surname.toLowerCase()
     let lowerNeedle = needle.toLowerCase()
   
-    // ADD key to matches if key contains needle
+    // ADD surname to matches if key contains needle
     if (lowerSurname.includes(lowerNeedle)) {
       console.log(`Matched: ${surname}`)
       console.log([surname, family])
@@ -135,7 +159,7 @@ function searchStrInDict(needle, dict) {
   
       }
   
-    }) // END familes
+    }) // END namesGroup
   
   
   }
@@ -144,6 +168,22 @@ function searchStrInDict(needle, dict) {
 
 }
 
+
+function testHarness(searchStrings, dict) {
+
+  for (let i=0; i < searchStrings.length; i++ ) {
+
+    let matchedNames = searchStrInDict(searchStrings[i], dict)
+ 
+    // DISPLAY RESULTS
+    console.log(`\nmatchedNames:`, matchedNames, `\n`)
+    // console.table(dict)
+  
+    console.log(bar)
+
+  }
+
+}
 
 
 /*
