@@ -93,7 +93,6 @@ function main() {
   }
 
   console.log()
-  console.log({ results })
   console.log(`\nmatchedNames:`, matchedNames)
   console.table(surnamesDict)
 
