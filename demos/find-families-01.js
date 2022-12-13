@@ -82,7 +82,7 @@ function main() {
       let lowerName = name.toLowerCase()
       if (lowerName.includes(lowerNeedle)) {
         console.log(name, `matched needle`, needle)
-        results.push(name)
+        matchedNames.push(name)
 
       }
 
