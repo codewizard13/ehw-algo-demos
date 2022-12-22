@@ -1,13 +1,12 @@
 /*
-Program Type:     TUTWRK
-Platform/Channel: YouTube/The Coding Train
+Program Name:     Demo: Create 10x10 grid with special sevens
+Program Type:     DEMO
 Programmer:       Eric Hepperle
 Date Created:     2022-12-22
 
 Purpose: Demonstrate multidimensional arrays in JavaScript
 
-NOTES: This is loosely inspired by the work in the tutorial.
-Here are the challenge rules I created:
+NOTES: These are the requirements I created:
 - Create a 2 dimensional game board using rows and cols values
 - Fill every spot that is a multiple of 7 with a checkbox emoji
 - Fill all other spots with the box ID of that spot
@@ -15,7 +14,7 @@ Here are the challenge rules I created:
 If we imagine each spot can hold one "box", each box should
 either display a the box ID, or a checked checkbox.
 
-TIME TO SOLVE: Solved in a about 30 minutes.
+TIME TO SOLVE: Solved in a about 5 minutes.
 */
 
 let cols = 10
