@@ -33,8 +33,8 @@ function main() {
   console.log(bar)
 
   // DEFINE people file path
-  const docs_path = '../' + 'data-docs/'
-  const peopleFile = docs_path + 'people2.txt'
+  const DOCS_PATH = '../../' + 'data-docs/'
+  const peopleFile = DOCS_PATH + 'people2.txt'
   
   // SLURP DATA FILE INTO ARRAY
   const fullNames = filenameToLines(peopleFile)
